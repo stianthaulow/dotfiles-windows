@@ -2,7 +2,7 @@ $configPath = "$env:USERPROFILE/.gconfig"
 
 $bookmarks = @{
   "dev"  = "C:\Dev";
-  "home" = $env:USERPROFILE
+  "h" = $env:USERPROFILE
 }
 
 if (!(Test-Path $configPath)) {
