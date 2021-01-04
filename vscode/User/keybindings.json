@@ -1,0 +1,16 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+  {
+    "key": "ctrl+oem_7",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+oem_3",
+    "command": "-workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+oem_7",
+    "command": "-ms-azurecli.runLineInTerminal",
+    "when": "editorTextFocus && editorLangId == 'azcli'"
+  }
+]

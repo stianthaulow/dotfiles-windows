@@ -1,0 +1,49 @@
+{
+    "workbench.iconTheme": "vscode-icons",
+    "gitlens.hovers.currentLine.over": "line",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.formatOnSave": true,
+    "window.zoomLevel": 0,
+    "git.autofetch": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "terminal.integrated.automationShell.windows": "",
+    "terminal.integrated.shell.windows": "C:/Program Files/PowerShell/7/pwsh.exe",
+    "terminal.integrated.shellArgs.windows": ["-NoLogo", "-NoExit"],
+    "terminal.integrated.fontFamily": "Cascadia Code PL",
+    "workbench.colorCustomizations": {
+        "terminal.background":"#212121",
+        "terminal.foreground":"#f8f8f2",
+        "terminal.ansiBlack":"#21222c",
+        "terminal.ansiBrightBlack":"#545454",
+        "terminal.ansiBrightBlue":"#d6acff",
+        "terminal.ansiBrightCyan":"#a4ffff",
+        "terminal.ansiBrightGreen":"#69ff94",
+        "terminal.ansiBrightMagenta":"#ff92df",
+        "terminal.ansiBrightRed":"#ff6e6e",
+        "terminal.ansiBrightWhite":"#f8f8f2",
+        "terminal.ansiBrightYellow":"#ffcb6b",
+        "terminal.ansiCyan":"#8be9fd",
+        "terminal.ansiBlue":"#82aaff",
+        "terminal.ansiGreen":"#50fa7b",
+        "terminal.ansiMagenta":"#c792ea",
+        "terminal.ansiRed":"#ff5555",
+        "terminal.ansiWhite":"#f8f8f2",
+        "terminal.ansiYellow":"#ffcb6b"
+      }
+}
