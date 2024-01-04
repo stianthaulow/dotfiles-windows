@@ -1,7 +1,7 @@
 
 $apps = @(
   @{name = "7zip.7zip" },
-  @{name = "Microsoft.WindowsTerminal" },
+  @{name = "Microsoft.WindowsTerminal" }
 )
 
 foreach ($app in $apps) {
