@@ -1,6 +1,6 @@
 
 $apps = @(
-  @{name = "7zip.7zi" },
+  @{name = "7zip.7zip" },
   @{name = "Microsoft.WindowsTerminal" }
 )
 
