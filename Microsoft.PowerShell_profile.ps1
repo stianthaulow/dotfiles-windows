@@ -168,6 +168,9 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
   }
 }
 
+# Fast Node Manager (fnm) autocomplete
+fnm env --use-on-cd | Out-String | Invoke-Expression
+
 Import-Module DockerCompletion
 
 Clear-Host
