@@ -3,8 +3,9 @@ if ($PSVersionTable.PSEdition -ne "Core") {
     $null = Get-Command pwsh -ErrorAction Stop
     Write-Host "Run this script under Powershell Core" -ForegroundColor Red
     exit
-  } catch {
-      winget install Microsoft.PowerShell
+  }
+  catch {
+    winget install Microsoft.PowerShell
   }
 }
 
@@ -30,27 +31,27 @@ $directoriesToCreate = @(
 )
 foreach ($directory in $directoriesToCreate) {
   if (-not (Test-Path $directory)) {
-      # The directory does not exist, so create it
-      New-Item -Path $directory -ItemType Directory
-      Write-Host "Created directory: $directory" -ForegroundColor Green
+    # The directory does not exist, so create it
+    New-Item -Path $directory -ItemType Directory
+    Write-Host "Created directory: $directory" -ForegroundColor Green
   }   
 }
 
 # Install Windows Subsystem for Linux
 $wslFeature = Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 if ($wslFeature -and $wslFeature.State -ne "Enabled") {
-    Write-host "Install wsl? [Y/n]" -ForegroundColor Yellow
-    $key = [System.Console]::ReadKey($true)
-    if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
-        wsl --install
-    }
+  Write-host "Install wsl? [Y/n]" -ForegroundColor Yellow
+  $key = [System.Console]::ReadKey($true)
+  if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
+    wsl --install
+  }
 } 
 
 # Default settings
 Write-host "Set windows defaults? [Y/n]" -ForegroundColor Yellow
 $key = [System.Console]::ReadKey($true)
 if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
-      Start-Process Powershell -ArgumentList "-File `"$PSScriptRoot\windows-defaults.ps1`"" -Verb RunAs
+  & "$PSScriptRoot\windows-defaults.ps1"
 }
 
 # Install apps
