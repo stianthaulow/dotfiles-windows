@@ -16,3 +16,12 @@ https://apps.microsoft.com/detail/9NBLGGH4NNS1?rtc=1&hl=en&gl=US
 winget install Git.Git
 ```
 
+### Clone repo
+```powershell
+git clone https://github.com/stianthaulow/dotfiles-windows.git .dotfiles && cd .dotfiles
+```
+
+### Powershell Core
+```powershell
+winget install Microsoft.Powershell
+```
