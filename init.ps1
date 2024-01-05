@@ -72,7 +72,14 @@ Write-host "Install applications? [Y/n]" -ForegroundColor Yellow
 $key = [System.Console]::ReadKey($true)
 if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
   & "$PSScriptRoot\apps.ps1"
-  refreshenv
+  
+  # Refresh environment variables from the registry
+  foreach ($item in [System.Environment]::GetEnvironmentVariables("Machine").GetEnumerator()) {
+    [System.Environment]::SetEnvironmentVariable($item.Key, $item.Value, "Process")
+  }
+  foreach ($item in [System.Environment]::GetEnvironmentVariables("User").GetEnumerator()) {
+    [System.Environment]::SetEnvironmentVariable($item.Key, $item.Value, "Process")
+  }
 }
 
 # Copy Oh My Posh theme
