@@ -17,9 +17,6 @@ if (!$isAdmin) {
   exit
 }
 
-# Set execution policy of Windows Powershell
-Start-Process powershell -Verb runAs -ArgumentList "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
-
 # Create Dev and Tools dir
 $directoriesToCreate = @(
   "C:\Dev",

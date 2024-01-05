@@ -19,6 +19,12 @@ winget install Git.Git
 ```powershell
 winget install Microsoft.Powershell
 ```
+
+### Set Windows powershell execution policy
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
 `*Run powershell as admin*`
 
 ### Clone repo

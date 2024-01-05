@@ -60,5 +60,5 @@ rundll32.exe user32.dll, UpdatePerUserSystemParameters
 Write-host "Unpin start menu items? [Y/n]" -ForegroundColor Yellow
 $key = [System.Console]::ReadKey($true)
 if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
-  & "$PSScriptRoot\windows-defaults.ps1"
+  & "$PSScriptRoot\unpin-start.ps1"
 }
