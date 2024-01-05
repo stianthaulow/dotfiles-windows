@@ -12,11 +12,10 @@ $START_MENU_LAYOUT = @"
 </LayoutModificationTemplate>
 "@
 
-$layoutFile="C:\Windows\StartMenuLayout.xml"
+$layoutFile = "C:\Windows\StartMenuLayout.xml"
 
 #Delete layout file if it already exists
-If(Test-Path $layoutFile)
-{
+If (Test-Path $layoutFile) {
     Remove-Item $layoutFile
 }
 
@@ -26,11 +25,11 @@ $START_MENU_LAYOUT | Out-File $layoutFile -Encoding ASCII
 $regAliases = @("HKLM", "HKCU")
 
 #Assign the start layout and force it to apply with "LockedStartLayout" at both the machine and user level
-foreach ($regAlias in $regAliases){
+foreach ($regAlias in $regAliases) {
     $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
     $keyPath = $basePath + "\Explorer" 
-    IF(!(Test-Path -Path $keyPath)) { 
-        New-Item -Path $basePath -Name "Explorer"
+    IF (!(Test-Path -Path $keyPath)) { 
+        New-Item -Path $basePath -Name "Explorer" | Out-Null
     }
     Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 1
     Set-ItemProperty -Path $keyPath -Name "StartLayoutFile" -Value $layoutFile
@@ -43,7 +42,7 @@ $wshell = New-Object -ComObject wscript.shell; $wshell.SendKeys('^{ESCAPE}')
 Start-Sleep -s 5
 
 #Enable the ability to pin items again by disabling "LockedStartLayout"
-foreach ($regAlias in $regAliases){
+foreach ($regAlias in $regAliases) {
     $basePath = $regAlias + ":\SOFTWARE\Policies\Microsoft\Windows"
     $keyPath = $basePath + "\Explorer" 
     Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
