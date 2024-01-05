@@ -17,18 +17,6 @@ if (!$isAdmin) {
   exit
 }
 
-# Create Powershell profile directory if it doesn't exist
-$profileDir = Split-Path -parent $profile
-New-Item $profileDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
-
-# Copy profile to profile directory
-Write-host "Copy powershell profile? [Y/n]" -ForegroundColor Yellow
-$key = [System.Console]::ReadKey($true)
-if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
-  Write-host "Copying Powershell profile to: `"$profileDir`"..." -ForegroundColor Green
-  Copy-Item -Path ./Microsoft.PowerShell_profile.ps1 -Destination $profileDir
-}
-
 # Create Dev and Tools dir
 $directoriesToCreate = @(
   "C:\Dev",
@@ -40,6 +28,23 @@ foreach ($directory in $directoriesToCreate) {
     New-Item -Path $directory -ItemType Directory | Out-Null
     Write-Host "Created directory: $directory" -ForegroundColor Green
   }   
+}
+
+# Copy Oh My Posh theme
+write-host "Copying Oh My Posh theme..." -ForegroundColor Green
+$ompThemePath = "$env:POSH_THEMES_PATH\thaulow.omp.json"
+Copy-Item -Path "$PSScriptRoot\Oh My Posh\thaulow.omp.json" -Destination $ompThemePath -Force
+
+# Create Powershell profile directory if it doesn't exist
+$profileDir = Split-Path -parent $profile
+New-Item $profileDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
+
+# Copy profile to profile directory
+Write-host "Copy powershell profile? [Y/n]" -ForegroundColor Yellow
+$key = [System.Console]::ReadKey($true)
+if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
+  Write-host "Copying Powershell profile to: `"$profileDir`"..." -ForegroundColor Green
+  Copy-Item -Path $PSScriptRoot\Microsoft.PowerShell_profile.ps1 -Destination $profileDir
 }
 
 # Install Windows Subsystem for Linux
