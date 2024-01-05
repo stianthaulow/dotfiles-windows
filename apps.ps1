@@ -92,7 +92,8 @@ If ($selectedApps.Count -ne 0) {
         $listApp = winget list --exact -q $appId
         if (![String]::Join("", $listApp).Contains($appId)) {
             Write-host "Installing: " $appId
-            winget install -e -h --accept-source-agreements --accept-package-agreements --id $appId $appArgs
+            $wingetArgs = "install -e -h --accept-source-agreements --accept-package-agreements --id $appId $appArgs"
+            Invoke-Expression "winget $wingetArgs"
         }
         else {
             Write-host "Skipping: " $appName " (already installed)" -ForegroundColor DarkGray
