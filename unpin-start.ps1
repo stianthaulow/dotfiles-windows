@@ -55,3 +55,5 @@ Stop-Process -name explorer
 #Import-StartLayout -LayoutPath $layoutFile -MountPath $env:SystemDrive\
 
 Remove-Item $layoutFile
+
+Write-Host "Start menu layout applied." -ForegroundColor Green
