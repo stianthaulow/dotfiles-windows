@@ -1,4 +1,6 @@
+Import-Module posh-git
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\thaulow.omp.json" | Invoke-Expression
+$env:POSH_GIT_ENABLED = $true
 
 # Fix directory background color - https://github.com/PowerShell/PowerShell/issues/18550
 $PSStyle.FileInfo.Directory = "`e[38;2;255;255;255m"
