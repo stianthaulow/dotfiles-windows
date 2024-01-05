@@ -126,10 +126,9 @@ if ([String]::Join("", $listApp).Contains("Microsoft.WindowsTerminal")) {
         $wtState | Add-Member -MemberType NoteProperty -Name $keyName -Value @("setAsDefault")
       }
       else {
-        $wtState.$keyName = "[`"setAsDefault`"]"
+        $wtState.$keyName = @("setAsDefault")
       }
       $jsonString = $wtState | ConvertTo-Json
-      Write-Host $jsonString
       Set-Content "$wtSettingsPath\state.json" -Value $jsonString
     }
     else {
