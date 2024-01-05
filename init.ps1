@@ -80,26 +80,30 @@ if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
 }
 
 # Windows Terminal settings
-Write-host "Set windows terminal settings? [Y/n]" -ForegroundColor Yellow
-$key = [System.Console]::ReadKey($true)
-if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
-  $wtSettingsPath = "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
-  Copy-Item -Path "$PSScriptRoot\Windows Terminal\settings.json" -Destination $wtSettingsPath -Force
-  if (Test-Path -Path "$wtSettingsPath\state.json") {
-    $wtState = Get-Content -Path "$wtSettingsPath\state.json" | ConvertFrom-Json
-    $keyName = "dismissedMessages"
-    if (-not $wtState.PSObject.Properties.Name.Contains($keyName)) {
-      $wtState | Add-Member -MemberType NoteProperty -Name $keyName -Value @("setAsDefault")
+$listApp = winget list --exact -q "Microsoft.WindowsTerminal"
+# Check if Windows Terminal is installed
+if ([String]::Join("", $listApp).Contains("Microsoft.WindowsTerminal")) {
+  Write-host "Set windows terminal settings? [Y/n]" -ForegroundColor Yellow
+  $key = [System.Console]::ReadKey($true)
+  if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
+    $wtSettingsPath = "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
+    Copy-Item -Path "$PSScriptRoot\Windows Terminal\settings.json" -Destination $wtSettingsPath -Force
+    if (Test-Path -Path "$wtSettingsPath\state.json") {
+      $wtState = Get-Content -Path "$wtSettingsPath\state.json" | ConvertFrom-Json
+      $keyName = "dismissedMessages"
+      if (-not $wtState.PSObject.Properties.Name.Contains($keyName)) {
+        $wtState | Add-Member -MemberType NoteProperty -Name $keyName -Value @("setAsDefault")
+      }
+      else {
+        $wtState.$keyName = "[`"setAsDefault`"]"
+      }
+      $jsonString = $wtState | ConvertTo-Json
+      Write-Host $jsonString
+      Set-Content "$wtSettingsPath\state.json" -Value $jsonString
     }
     else {
-      $wtState.$keyName = "[`"setAsDefault`"]"
+      Copy-Item -Path "$PSScriptRoot\Windows Terminal\state.json" -Destination $wtSettingsPath -Force
     }
-    $jsonString = $wtState | ConvertTo-Json
-    Write-Host $jsonString
-    Set-Content "$wtSettingsPath\state.json" -Value $jsonString
-  }
-  else {
-    Copy-Item -Path "$PSScriptRoot\Windows Terminal\state.json" -Destination $wtSettingsPath -Force
   }
 }
 

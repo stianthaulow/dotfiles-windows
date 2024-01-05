@@ -84,3 +84,6 @@ foreach ($FontItem in (Get-ChildItem -Path $PSScriptRoot\Fonts |
     Where-Object { ($_.Name -like '*.ttf') -or ($_.Name -like '*.otf') })) {  
   Install-Font -fontFile $FontItem.FullName  
 }
+
+Write-Host "Fonts installed, press any key to continue." -ForegroundColor Green
+[System.Console]::ReadKey($true)
