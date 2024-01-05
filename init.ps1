@@ -71,6 +71,13 @@ if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
   & "$PSScriptRoot\windows-defaults.ps1"
 }
 
+# Debloat
+Write-host "Debloat windows? [Y/n]" -ForegroundColor Yellow
+$key = [System.Console]::ReadKey($true)
+if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
+  Start-Process Powershell -ArgumentList "-File `"$PSScriptRoot\debloat.ps1`"" -Verb RunAs
+}
+
 # Install Powershell modules
 Write-host "Install Powershell modules? [Y/n]" -ForegroundColor Yellow
 $key = [System.Console]::ReadKey($true)
