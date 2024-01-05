@@ -30,11 +30,6 @@ foreach ($directory in $directoriesToCreate) {
   }   
 }
 
-# Copy Oh My Posh theme
-write-host "Copying Oh My Posh theme..." -ForegroundColor Green
-$ompThemePath = "$env:POSH_THEMES_PATH\thaulow.omp.json"
-Copy-Item -Path "$PSScriptRoot\Oh My Posh\thaulow.omp.json" -Destination $ompThemePath -Force
-
 # Create Powershell profile directory if it doesn't exist
 $profileDir = Split-Path -parent $profile
 New-Item $profileDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
@@ -77,6 +72,15 @@ Write-host "Install applications? [Y/n]" -ForegroundColor Yellow
 $key = [System.Console]::ReadKey($true)
 if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
   & "$PSScriptRoot\apps.ps1"
+}
+
+# Copy Oh My Posh theme
+$listApp = winget list --exact -q "JanDeDobbeleer.OhMyPosh"
+# Check if Oh My Posh is installed
+if ([String]::Join("", $listApp).Contains("JanDeDobbeleer.OhMyPosh")) {
+  write-host "Copying Oh My Posh theme..." -ForegroundColor Green
+  $ompThemePath = "$env:POSH_THEMES_PATH\thaulow.omp.json"
+  Copy-Item -Path "$PSScriptRoot\Oh My Posh\thaulow.omp.json" -Destination $ompThemePath -Force
 }
 
 # Windows Terminal settings
