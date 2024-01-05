@@ -22,8 +22,14 @@ $profileDir = Split-Path -parent $profile
 New-Item $profileDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
 
 # Copy profile to profile directory
-Write-host "Copying Powershell profile to: `"$profileDir`"..." -ForegroundColor Green
-Copy-Item -Path ./Microsoft.PowerShell_profile.ps1 -Destination $profileDir 
+# Install Fonts
+Write-host "Copy powershell profile? [Y/n]" -ForegroundColor Yellow
+$key = [System.Console]::ReadKey($true)
+if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
+  Write-host "Copying Powershell profile to: `"$profileDir`"..." -ForegroundColor Green
+  Copy-Item -Path ./Microsoft.PowerShell_profile.ps1 -Destination $profileDir
+}
+ 
 
 $directoriesToCreate = @(
   "C:\Dev",
@@ -32,7 +38,7 @@ $directoriesToCreate = @(
 foreach ($directory in $directoriesToCreate) {
   if (-not (Test-Path $directory)) {
     # The directory does not exist, so create it
-    New-Item -Path $directory -ItemType Directory
+    New-Item -Path $directory -ItemType Directory | Out-Null
     Write-Host "Created directory: $directory" -ForegroundColor Green
   }   
 }
@@ -46,6 +52,14 @@ if ($wslFeature -and $wslFeature.State -ne "Enabled") {
     wsl --install
   }
 } 
+
+# Install Fonts
+Write-host "Install fonts? [Y/n]" -ForegroundColor Yellow
+$key = [System.Console]::ReadKey($true)
+if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
+  Start-Process Powershell -ArgumentList "-File `"$PSScriptRoot\install-fonts.ps1`"" -Verb RunAs
+}
+
 
 # Default settings
 Write-host "Set windows defaults? [Y/n]" -ForegroundColor Yellow
