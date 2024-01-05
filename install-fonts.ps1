@@ -83,6 +83,4 @@ function Uninstall-Font {
 foreach ($FontItem in (Get-ChildItem -Path $PSScriptRoot\Fonts | 
     Where-Object { ($_.Name -like '*.ttf') -or ($_.Name -like '*.otf') })) {  
   Install-Font -fontFile $FontItem.FullName  
-} 
-
-$key = [System.Console]::ReadKey($true)
+}
