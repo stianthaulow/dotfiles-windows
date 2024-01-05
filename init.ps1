@@ -67,6 +67,13 @@ if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
   & "$PSScriptRoot\windows-defaults.ps1"
 }
 
+# Install Powershell modules
+Write-host "Install Powershell modules? [Y/n]" -ForegroundColor Yellow
+$key = [System.Console]::ReadKey($true)
+if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
+  & "$PSScriptRoot\powershell-modules.ps1"
+}
+
 # Install apps
 Write-host "Install applications? [Y/n]" -ForegroundColor Yellow
 $key = [System.Console]::ReadKey($true)
