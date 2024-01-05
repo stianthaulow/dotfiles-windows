@@ -72,6 +72,7 @@ Write-host "Install applications? [Y/n]" -ForegroundColor Yellow
 $key = [System.Console]::ReadKey($true)
 if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
   & "$PSScriptRoot\apps.ps1"
+  refreshenv
 }
 
 # Copy Oh My Posh theme
