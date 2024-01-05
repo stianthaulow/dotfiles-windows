@@ -17,6 +17,10 @@ if (!$isAdmin) {
   exit
 }
 
+# Set language
+Start-Process Powershell -ArgumentList "-File `"$PSScriptRoot\language.ps1`"" -Verb RunAs
+
+
 # Create Dev and Tools dir
 $directoriesToCreate = @(
   "C:\Dev",
@@ -73,6 +77,7 @@ $key = [System.Console]::ReadKey($true)
 if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
   & "$PSScriptRoot\powershell-modules.ps1"
 }
+
 
 # Install apps
 Write-host "Install applications? [Y/n]" -ForegroundColor Yellow
