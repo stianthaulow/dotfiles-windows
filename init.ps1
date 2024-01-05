@@ -22,15 +22,14 @@ $profileDir = Split-Path -parent $profile
 New-Item $profileDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
 
 # Copy profile to profile directory
-# Install Fonts
 Write-host "Copy powershell profile? [Y/n]" -ForegroundColor Yellow
 $key = [System.Console]::ReadKey($true)
 if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
   Write-host "Copying Powershell profile to: `"$profileDir`"..." -ForegroundColor Green
   Copy-Item -Path ./Microsoft.PowerShell_profile.ps1 -Destination $profileDir
 }
- 
 
+# Create Dev and Tools dir
 $directoriesToCreate = @(
   "C:\Dev",
   "C:\Tools"
@@ -73,6 +72,14 @@ Write-host "Install applications? [Y/n]" -ForegroundColor Yellow
 $key = [System.Console]::ReadKey($true)
 if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
   & "$PSScriptRoot\apps.ps1"
+}
+
+# Windows Terminal settings
+Write-host "Set windows terminal settings? [Y/n]" -ForegroundColor Yellow
+$key = [System.Console]::ReadKey($true)
+if ($key.Key -eq 'Y' -or $key.Key -eq 'Enter') {
+  $wtSettingsPath = "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
+  Copy-Item -Path "$PSScriptRoot\Windows Terminal\settings.json" -Destination $wtSettingsPath -Force
 }
 
 # Ahk workscript
